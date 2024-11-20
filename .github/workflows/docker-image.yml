@@ -18,7 +18,7 @@ jobs:
         uses: docker/login-action@v2.1.0
         with:
             username: ${{vars.USER2}}
-            password: ${{secrets.ZKRP}}
+            password: ${{secrets.TOKEN}}
             
 
    

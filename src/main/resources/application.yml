@@ -1,0 +1,22 @@
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://52.78.155.26:3306/PockyDB
+    username: centerfoward
+    password: b08267410ab@
+jpa:
+  properties:
+    hibernate:
+
+      globally_quoted_identifiers: true
+      ddl-auto: update
+      show_sql: true
+      format_sql: true
+logging.level:
+  org.hibernate.SQL: debug
+server:
+  address: 0.0.0.0
+  port: 8080

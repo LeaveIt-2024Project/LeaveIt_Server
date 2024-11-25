@@ -1,22 +1,24 @@
 package com.LeaveIt.server.service;
 
-import com.LeaveIt.server.controller.model.response.UserJoinResponse;
-import com.LeaveIt.server.controller.model.response.UserLoginResponse;
+import com.LeaveIt.server.controller.model.response.UserJoin;
+import com.LeaveIt.server.controller.model.response.UserLogin;
 import com.LeaveIt.server.repository.UserRepository;
 import com.LeaveIt.server.repository.entity.User;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
+
 @Slf4j
+@Service("defaultLoginService")
+@RequiredArgsConstructor
 public class LoginServiceImpl implements  LoginService {
 
-    private final UserRepository userRepository;
+    private  final UserRepository userRepository;
 
     @Override
-    public String join(UserJoinResponse join) {
+    public String join(UserJoin join) {
         User user = new User();
 
         if (join.getId().equals(userRepository.findByUserId(join.getId()))){
@@ -29,13 +31,13 @@ public class LoginServiceImpl implements  LoginService {
     }
 
     @Override
-    public String login(UserLoginResponse userLoginResponse) {
+    public String login(UserLogin userLoginResponse) {
 
        return loginCheck(userLoginResponse);
 
     }
 
-    private String loginCheck(UserLoginResponse login) {
+    private String loginCheck(UserLogin login) {
 
         String userId = userRepository.findByUserId(login.getId());
         if (userId.equals(login.getId())) {

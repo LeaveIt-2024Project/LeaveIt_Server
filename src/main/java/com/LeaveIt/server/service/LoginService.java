@@ -1,12 +1,17 @@
 package com.LeaveIt.server.service;
 
-import com.LeaveIt.server.controller.model.response.UserJoinResponse;
-import com.LeaveIt.server.controller.model.response.UserLoginResponse;
+import com.LeaveIt.server.controller.model.response.UserJoin;
+import com.LeaveIt.server.controller.model.response.UserLogin;
+import org.springframework.stereotype.Service;
+
 
 public interface LoginService {
 
 
-    String join(UserJoinResponse userJoinResponse);
+    String join(UserJoin userJoinResponse);
 
-    String  login(UserLoginResponse userLoginResponse);
+    String  login(UserLogin userLoginResponse);
+
+
+
 }

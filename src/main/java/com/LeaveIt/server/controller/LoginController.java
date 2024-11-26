@@ -30,44 +30,31 @@ public class LoginController {
     @PostMapping("/join")
     public ResponseEntity<HttpStatus> joinUser(@RequestBody UserJoin join){
 
-        if (defaultLoginService.join(join) != "성공") {
-            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-        }
+        defaultLoginService.join(join);
+
         return  ResponseEntity.ok(HttpStatus.OK);
     }
     @PostMapping("/login")
     public  ResponseEntity<HttpStatus>  loginUser(@RequestBody UserLogin login){
-
-        if (defaultLoginService.login(login) != "성공") {
-            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-        }
+        defaultLoginService.login(login);
         return  ResponseEntity.ok(HttpStatus.OK);
-
     }
 
 
     @PostMapping("/kakaojoin")
     public ResponseEntity<HttpStatus> kakaoJoinUser(@RequestBody UserJoin join){
 
-        if (kakaoLoginService.join(join) != "성공") {
-            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-        }
+        kakaoLoginService.join(join);
 
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/kakaologin")
     public ResponseEntity<HttpStatus> kakaoLoginUser(@RequestBody UserLogin login){
-
-        if (kakaoLoginService.login(login) != "성공") {
-            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-        }
+        kakaoLoginService.login(login);
         return  ResponseEntity.ok(HttpStatus.OK);
+
     }
-
-
-
-
 }
 
 

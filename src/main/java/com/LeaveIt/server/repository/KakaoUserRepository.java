@@ -10,6 +10,8 @@ import javax.swing.*;
 @Repository
 public interface KakaoUserRepository  extends JpaRepository<KakaoUser,String> {
 
-    @Query("select u.kakaoUID  from kakaouser u where :id=u.kakaoUID")
-    String findByUserKaKaoId(@Param("id") String id);
+    @Query("select u.kakaoUID  from kakaouser u where :kakaoUID=u.kakaoUID")
+    String findByUserKaKaoId(@Param("kakaoUID") String kakaoUID);
+
+
 }

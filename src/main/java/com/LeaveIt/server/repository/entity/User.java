@@ -56,18 +56,6 @@ public class User {
 
 
 
-    public User JoinToEntity(UserJoin user){
-        return User.builder()
-                .userUID(user.getUserUID())
-                .id(user.getId())
-                .nickname(user.getNickname())
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .profileImage(user.getProfileImage())
-                .preferRegion(user.getPreferRegion())
-                .createdAt(LocalDateTime.now())
-                .build();
-    }
 
 
 //    public  User LoginToEntity(UserLogin login){

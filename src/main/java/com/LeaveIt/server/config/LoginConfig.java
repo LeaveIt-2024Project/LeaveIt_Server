@@ -8,6 +8,7 @@ import com.LeaveIt.server.service.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class LoginConfig {
@@ -18,10 +19,14 @@ public class LoginConfig {
 
     @Autowired
     private KakaoUserRepository kakaoUserRepository;
+
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
+
     @Bean
         public LoginService LoginService() {
 
-            return new LoginServiceImpl(userRepository);
+            return new LoginServiceImpl(passwordEncoder, userRepository);
         }
 
         @Bean

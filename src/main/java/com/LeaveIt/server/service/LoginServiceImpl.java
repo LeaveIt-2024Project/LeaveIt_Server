@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-
 import static com.LeaveIt.server.exception.ErrorCode.*;
 
 
@@ -29,12 +26,14 @@ public class LoginServiceImpl implements  LoginService {
 //    }
     @Override
     public String join(UserJoin join) {
+
         if ((userRepository.findByUserId(join.getId())==null) ) {
             userRepository.save(JoinToEntity(join));
             return "성공";
         }
         throw new UserException(ALREADY_APPID_FAIR);
-    }
+
+
 
     @Override
     public String login(UserLogin userLoginResponse) {
@@ -51,13 +50,14 @@ public class LoginServiceImpl implements  LoginService {
         String userId = userRepository.findByUserId(login.getId());
         if (userId == null || !userId.equals(login.getId())) {
             throw new UserException(APPID_NOT_FOUND);
+          
         }if (passwordCheck(login.getPassword(),userRepository.findByPassword(userId))){
             return "성공";
 //            userRepository.findByPassword(userId).equals(login.getPassword())
         }
         throw new UserException(APP_PASSWD_NOT_FOUND);
 
-    }
+
 
     private boolean passwordCheck(String rawPassword,String storedEncryptedPassword) {
         return passwordEncoder.matches(rawPassword, storedEncryptedPassword);

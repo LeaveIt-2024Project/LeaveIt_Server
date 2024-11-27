@@ -49,14 +49,14 @@ public class LoginController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/kakaologin")
-    public ResponseEntity<HttpStatus> kaKaoLoginUser(@RequestBody UserLogin login){
+
+  
+    public ResponseEntity<HttpStatus> kakaoLoginUser(@RequestBody UserLogin login){
         kakaoLoginService.login(login);
         return  ResponseEntity.ok(HttpStatus.OK);
 
+
     }
-
-
 }
 
 

@@ -42,17 +42,19 @@ public class LoginController {
 
 
     @PostMapping("/kakaojoin")
-    public ResponseEntity<HttpStatus> kakaoJoinUser(@RequestBody UserJoin join){
+    public ResponseEntity<HttpStatus> kaKaoJoinUser(@RequestBody UserJoin join){
 
         kakaoLoginService.join(join);
 
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/kakaologin")
+
+  
     public ResponseEntity<HttpStatus> kakaoLoginUser(@RequestBody UserLogin login){
         kakaoLoginService.login(login);
         return  ResponseEntity.ok(HttpStatus.OK);
+
 
     }
 }

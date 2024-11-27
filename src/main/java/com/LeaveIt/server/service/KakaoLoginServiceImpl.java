@@ -42,7 +42,7 @@ public class KakaoLoginServiceImpl implements LoginService{
 
         return loginCheck(userLoginResponse);
     }
-
+    
 
     private String loginCheck(UserLogin login) {
         log.info("hello");

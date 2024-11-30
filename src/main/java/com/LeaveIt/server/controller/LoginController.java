@@ -50,7 +50,9 @@ public class LoginController {
     @PostMapping("/kakaojoin")
     public ResponseEntity<HttpStatus> kaKaoJoinUser(@RequestBody UserJoin join){
 
+
         kakaoLoginService.join(join);
+
 
         return  ResponseEntity.ok(HttpStatus.OK);
     }

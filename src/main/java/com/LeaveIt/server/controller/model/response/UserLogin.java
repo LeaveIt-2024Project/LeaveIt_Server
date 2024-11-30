@@ -19,4 +19,6 @@ public class UserLogin {
     private LocalDateTime createdAt;
 
     private LocalDateTime lastLogin;
+
+    private  String token;
 }

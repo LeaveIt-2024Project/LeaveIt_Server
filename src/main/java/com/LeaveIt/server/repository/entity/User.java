@@ -10,8 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -19,7 +23,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity(name = "user")
-public class User {
+public class User  implements UserDetails {
 
 
 
@@ -30,6 +34,7 @@ public class User {
     private String id;
 
     private  String nickname;
+
     private String password;
 
     @Column(name = "phonenumber")
@@ -53,12 +58,36 @@ public class User {
     @Column(name = "lastlogin")
     private LocalDateTime lastLogin;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    @Override
+    public String getUsername() {
+
+        return userUID;
+    }
 
 
-
-
-
-//    public  User LoginToEntity(UserLogin login){
-//        return
-//    }
 }

@@ -1,5 +1,7 @@
 package com.LeaveIt.server.service;
 
+import com.LeaveIt.server.config.JwtTokenProvider;
+import com.LeaveIt.server.controller.model.jwt.JwtToken;
 import com.LeaveIt.server.controller.model.response.UserJoin;
 import com.LeaveIt.server.controller.model.response.UserLogin;
 import com.LeaveIt.server.exception.UserException;
@@ -8,6 +10,7 @@ import com.LeaveIt.server.repository.KakaoUserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,7 @@ import static com.LeaveIt.server.exception.ErrorCode.*;
 @Service
 public class KakaoLoginServiceImpl implements LoginService{
 
+    private final JwtTokenProvider jwtTokenProvider;
 
     private final  KakaoUserRepository kakaoUserRepository;
 
@@ -42,7 +46,20 @@ public class KakaoLoginServiceImpl implements LoginService{
 
         return loginCheck(userLoginResponse);
     }
-    
+
+    @Override
+    public JwtToken createToken(UserLogin userLoginResponse) {
+
+        return  null;
+    }
+
+    @Override
+    public JwtToken test(UserLogin userLoginResponse) {
+
+
+        return null;
+    }
+
 
     private String loginCheck(UserLogin login) {
         log.info("hello");

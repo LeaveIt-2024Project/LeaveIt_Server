@@ -64,6 +64,7 @@ public class LoginController {
         log.info("request username = {}, password = {}", username, password);
         log.info("jwtToken accessToken = {}, refreshToken = {}", jwtToken.getAccessToken(), jwtToken.getRefreshToken());
         return ResponseEntity.ok(defaultLoginService.test(login));
+
     }
 
 
@@ -71,6 +72,7 @@ public class LoginController {
     public ResponseEntity<HttpStatus> kakaoLoginUser(@RequestBody UserLogin login){
         kakaoLoginService.login(login);
         return  ResponseEntity.ok(HttpStatus.OK);
+
 
     }
 }

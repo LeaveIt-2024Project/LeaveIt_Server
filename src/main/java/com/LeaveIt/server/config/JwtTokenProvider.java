@@ -29,6 +29,7 @@ public class JwtTokenProvider {
     private  final Key key;
 
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
+        log.info("토큰");
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }

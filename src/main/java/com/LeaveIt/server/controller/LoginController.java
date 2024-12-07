@@ -67,7 +67,6 @@ public class LoginController {
 
     }
 
-
     @PostMapping("/kakaologin")
     public ResponseEntity<HttpStatus> kakaoLoginUser(@RequestBody UserLogin login){
         kakaoLoginService.login(login);

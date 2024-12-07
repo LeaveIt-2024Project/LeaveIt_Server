@@ -45,9 +45,16 @@ public class LoginServiceImpl implements  LoginService {
 
     }
         @Override
-        public String login (UserLogin userLoginResponse){
+        public  JwtToken login (UserLogin userLoginResponse) {
 
-            return loginCheck(userLoginResponse);
+
+//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userLoginResponse.getId(), userLoginResponse.getPassword());
+//            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+//            JwtToken jwtToken= jwtTokenProvider.generateToken(authentication);
+
+            loginCheck(userLoginResponse);
+
+            return jwtTokenProvider.createAccessToken(userLoginResponse);
 
     }
 
@@ -61,17 +68,19 @@ public class LoginServiceImpl implements  LoginService {
       //  Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
-        JwtToken jwtToken = jwtTokenProvider.generateToken(authenticationToken);
+//        JwtToken jwtToken = jwtTokenProvider.generateToken(authenticationToken);
 
-        return jwtToken;
+        return null;
     }
 
 
     @Override
     public JwtToken createToken(UserLogin userLoginResponse){
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userLoginResponse.getId(), userLoginResponse.getPassword());
-        JwtToken jwtToken = jwtTokenProvider.generateToken(authenticationToken);
-        return jwtToken;
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userLoginResponse.getId(), userLoginResponse.getPassword());
+//        JwtToken jwtToken = jwtTokenProvider.generateToken(authenticationToken);
+//        return jwtToken;
+
+        return  null;
     }
 
 

@@ -42,9 +42,10 @@ public class KakaoLoginServiceImpl implements LoginService{
         return  "성공";
     }
     @Override
-    public String login(UserLogin userLoginResponse) {
+    public JwtToken login(UserLogin userLoginResponse) {
 
-        return loginCheck(userLoginResponse);
+//        return loginCheck(userLoginResponse);
+        return  null;
     }
 
     @Override

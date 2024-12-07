@@ -11,7 +11,7 @@ public interface LoginService {
 
     String join(UserJoin userJoinResponse);
 
-    String  login(UserLogin userLoginResponse);
+     JwtToken  login(UserLogin userLoginResponse);
 
     JwtToken createToken(UserLogin userLoginResponse);
      JwtToken test(UserLogin userLoginResponse);

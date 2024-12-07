@@ -1,6 +1,6 @@
 package com.LeaveIt.server.config;
 
-import com.LeaveIt.server.Filter.JWtAuthenticationFilter;
+import com.LeaveIt.server.Filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,12 +25,11 @@ public class SecurityConfig {
                             .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화
                             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 정책 설정
                             .authorizeHttpRequests(authz -> authz
-                                    .requestMatchers(HttpMethod.POST, "/signin").permitAll()
+                                    .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                     .requestMatchers("/login","/join").permitAll() // 특정 엔드포인트 허용
-                                 //   .requestMatchers("/test").hasRole("USER") // USER 권한 필요
                                     .anyRequest().authenticated() // 기타 요청은 인증 필요
                             )
-                            .addFilterBefore(new JWtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) // JWT 인증 필터 추가
+                            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) // JWT 인증 필터 추가
                             .build();
 
     }

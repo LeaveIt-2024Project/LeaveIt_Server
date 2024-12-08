@@ -41,18 +41,18 @@ public class User  implements UserDetails {
     private  String phoneNumber;
 
 
-    @Column(name = "createdat")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
 
-    @Column(name = "updatedat")
+    @Column(name = "updated_at")
     private LocalDateTime  updatedAt;
 
-    @Column(name = "profileimage")
+    @Column(name = "profile_image")
     @Lob
     private String profileImage;
 
-    @Column(name = "preferregion")
+    @Column(name = "prefer_region")
     private String preferRegion;
 
     @Column(name = "lastlogin")
@@ -87,6 +87,12 @@ public class User  implements UserDetails {
     public String getUsername() {
 
         return userUID;
+    }
+    private UserDetails createUserDetails(User user){
+        return User.builder()
+                .id(user.getId())
+                .password(user.getPassword())
+                .build();
     }
 
 

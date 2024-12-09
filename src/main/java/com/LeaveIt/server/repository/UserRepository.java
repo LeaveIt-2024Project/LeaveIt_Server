@@ -18,5 +18,7 @@ public interface UserRepository extends JpaRepository<User,String> {
     String findByPassword(@Param("id") String id);
 
 
+    @Query("select u.feedUID  from Review u where :id=u.feedUID")
+    String findByLikeId(@Param("id") String id);
 
 }

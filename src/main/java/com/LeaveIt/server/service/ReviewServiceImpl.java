@@ -1,53 +1,99 @@
 package com.LeaveIt.server.service;
 
 
-<<<<<<< HEAD
 import com.LeaveIt.server.controller.model.request.ReviewRequest;
-=======
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
+import com.LeaveIt.server.controller.model.response.LikeReview;
 import com.LeaveIt.server.controller.model.response.ReviewResponse;
+import com.LeaveIt.server.exception.ErrorCode;
+import com.LeaveIt.server.exception.ReviewException;
+import com.LeaveIt.server.repository.LikeRepository;
 import com.LeaveIt.server.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import java.util.List;
+import java.util.Objects;
 
-=======
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-<<<<<<< HEAD
 
     private final ReviewRepository reviewRepository;
 
-=======
-    private  final ReviewRepository reviewRepository;
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
+    private final LikeRepository likeRepository;
+
     @Override
     @Transactional
-    public ReviewResponse saveFeed(ReviewResponse feedResponse) {
+    public ReviewResponse saveReview(ReviewResponse feedResponse) {
 
-<<<<<<< HEAD
         ReviewResponse response = new ReviewResponse();
         reviewRepository.save(response.DTO_To_Review(feedResponse));
         return feedResponse;
     }
 
     @Override
-    public List<ReviewRequest> findFeed(String id) {
+    public List<ReviewRequest> findReview(String id) {
         ReviewRequest reviewRequest = new ReviewRequest();
         return reviewRequest.Review_To_DTO(reviewRepository.findAllByUserReview(id));
     }
 
-}
-=======
-        ReviewResponse response=new ReviewResponse();
-        reviewRepository.save(response.DTO_To_Review(feedResponse));
-        return  feedResponse;
+    @Override
+    public List<ReviewRequest> findReviewAll() {
+
+        ReviewRequest reviewRequest = new ReviewRequest();
+
+        return reviewRequest.Review_To_DTO(reviewRepository.findAll());
+    }
+
+    @Override
+    @Transactional
+    public void saveReviewLike(String feedUID, LikeReview likeReview) {
+        checkedLike(feedUID, likeReview);
+        LikeReview like = new LikeReview();
+        likeRepository.save(like.DTO_To_Like(likeReview));
+        reviewRepository.saveCountLike(feedUID);
+
+    }
+
+    @Override
+    @Transactional
+    public void cancelReviewLike(String feedUID, LikeReview likeReview) {
+         cancelLike(feedUID, likeReview);
+         reviewRepository.minusCountLike(feedUID);
+         likeRepository.unlikePost(feedUID,likeReview.getUserUID());
+    }
+
+    @Override
+    public int findReviewCount(String id) {
+
+        return reviewRepository.findByReviewCount(id);
+    }
+
+    private void cancelLike(String feedUID, LikeReview likeReview) {
+        if (!Objects.equals(reviewRepository.findByReviewId(feedUID), feedUID)) {
+
+            throw new ReviewException(ErrorCode.REVIEW_NOT_FOUND);
+        }
+        if (!likeRepository.existsByLiked(likeReview.getUserUID())){
+            throw  new ReviewException(ErrorCode.LIKE_NOT_FOUND);
+        }
+    }
+
+    private boolean checkedLike(String feedUID, LikeReview likeReview) {
+        if (!Objects.equals(reviewRepository.findByReviewId(feedUID), feedUID)) {
+            throw new ReviewException(ErrorCode.REVIEW_NOT_FOUND);
+        }
+//        if (likeRepository.findByFeedUIDAndUserUID(feedUID, likeReview.getUserUID())){
+//            throw new ReviewException(ErrorCode.ALREADY_LIKE_FAIR);
+//        }
+        if(likeRepository.existsByLiked(likeReview.getUserUID())){
+            throw new ReviewException(ErrorCode.ALREADY_LIKE_FAIR);
+        }
+
+        return true;
+
     }
 }
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
+

@@ -1,23 +1,24 @@
 package com.LeaveIt.server.service;
 
-<<<<<<< HEAD
 import com.LeaveIt.server.controller.model.request.ReviewRequest;
+import com.LeaveIt.server.controller.model.response.LikeReview;
 import com.LeaveIt.server.controller.model.response.ReviewResponse;
-import com.LeaveIt.server.repository.entity.Review;
 
 import java.util.List;
-=======
-import com.LeaveIt.server.controller.model.response.ReviewResponse;
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
 
 public interface ReviewService {
 
-    ReviewResponse saveFeed(ReviewResponse feedResponse);
+    ReviewResponse saveReview(ReviewResponse feedResponse);
 
-<<<<<<< HEAD
 
-    List<ReviewRequest> findFeed(String id);
+    List<ReviewRequest> findReview(String id);
 
-=======
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
+    List<ReviewRequest> findReviewAll();
+
+    void saveReviewLike(String feedUID , LikeReview likeReview);
+
+    void cancelReviewLike(String feedUID, LikeReview likeReview);
+
+    int findReviewCount(String id);
+
 }

@@ -1,51 +1,60 @@
 package com.LeaveIt.server.controller;
 
 
-<<<<<<< HEAD
 import com.LeaveIt.server.controller.model.request.ReviewRequest;
-=======
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
+import com.LeaveIt.server.controller.model.response.LikeReview;
 import com.LeaveIt.server.controller.model.response.ReviewResponse;
 import com.LeaveIt.server.service.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-=======
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
-
 @RestController
 @RequiredArgsConstructor
 public class ReviewController {
 
 
-    private  final ReviewService reviewService;
+    private final ReviewService reviewService;
 
 
-<<<<<<< HEAD
     @GetMapping("/get/review/{id}")
-    public List<ReviewRequest> getFeed(
+    public List<ReviewRequest> getReview(
+            @PathVariable String id) {
+
+        return reviewService.findReview(id);
+    }
+
+    @PostMapping("/save/review")
+    public ReviewResponse saveReview(
+            @RequestBody ReviewResponse response) {
+
+        return reviewService.saveReview(response);
+    }
+
+    @GetMapping("/get/review/count/{id}")
+    public int getReviewCount(
             @PathVariable String id){
 
-        return  reviewService.findFeed(id);
+        return  reviewService.findReviewCount(id);}
+
+    @GetMapping("/get/reviewall")
+    public List<ReviewRequest> getReviewAll(){
+
+        return  reviewService.findReviewAll();
     }
 
-    @PostMapping("/save/review")
-    public ReviewResponse saveFeed(
-=======
+    @PostMapping("/save/like/{feedUID}")
+    public void  saveReviewLike(@PathVariable String feedUID, @RequestBody LikeReview likeReview){
 
-    @PostMapping("/save/review")
-    private ReviewResponse saveFeed(
->>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
-            @RequestBody ReviewResponse response){
-
-      return   reviewService.saveFeed(response);
+        reviewService.saveReviewLike(feedUID,likeReview);
     }
 
+    @PostMapping("/cancel/like/{feedUID}")
+    public void  cancelReviewLike(@PathVariable String feedUID, @RequestBody LikeReview likeReview){
 
+        reviewService.cancelReviewLike(feedUID,likeReview);
+    }
 }

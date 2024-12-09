@@ -25,4 +25,11 @@ public class GlobalControllerAdvice {
 //        return new ResponseEntity(new ErrorDTO(INTERNAL_SERVER_ERROR.getStatus(), INTERNAL_SERVER_ERROR.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
+
+    @ExceptionHandler(ReviewException.class)
+    protected ResponseEntity handlerReviewException(ReviewException ex) {
+        return  new ResponseEntity(new ErrorDTO(ex.getErrorCode().getStatus(),ex.getErrorCode().getMessage()),ex.getErrorCode().getStatus());
+
+    }
+
 }

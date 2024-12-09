@@ -4,7 +4,10 @@ package com.LeaveIt.server.repository.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+<<<<<<< HEAD
 import lombok.Getter;
+=======
+>>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -14,7 +17,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+<<<<<<< HEAD
 @Getter
+=======
+>>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
 @Entity
 @Table(name = "review")
 public class Review {
@@ -23,6 +29,7 @@ public class Review {
     @Column(name = "feeduid")
     private String  feedUID;
 
+<<<<<<< HEAD
 
     @Column(name = "kakaouid")
     private  String kaKaoUID;
@@ -30,6 +37,8 @@ public class Review {
     @Column(name = "useruid")
     private  String userUID;
 
+=======
+>>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
     private String nickname;
 
     private  String content;

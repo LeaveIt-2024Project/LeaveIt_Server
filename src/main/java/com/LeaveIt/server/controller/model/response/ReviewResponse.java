@@ -20,10 +20,13 @@ public class ReviewResponse {
 
     private String  feedUID;
 
+<<<<<<< HEAD
     private  String kaKaoUID;
 
     private  String userUID;
 
+=======
+>>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
     private String nickname;
 
     private  String content;
@@ -51,8 +54,11 @@ public class ReviewResponse {
         log.info(response.toString());
         return Review.builder()
                 .feedUID(UUID.randomUUID().toString())
+<<<<<<< HEAD
                 .userUID(response.getUserUID())
                 .kaKaoUID(response.getKaKaoUID())
+=======
+>>>>>>> 18-feat-리뷰-등록-구현-jwt-기능-구체화
                 .nickname(response.getNickname())
                 .content(response.getContent())
                 .feedImage(response.getFeedImage())

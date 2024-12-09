@@ -17,5 +17,9 @@ public class UserLogin {
     private  String password;
 
 
+    private LocalDateTime createdAt;
+
     private LocalDateTime lastLogin;
+
+    private  String token;
 }

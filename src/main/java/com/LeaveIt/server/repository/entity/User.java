@@ -10,8 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -19,7 +23,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity(name = "user")
-public class User {
+public class User  implements UserDetails {
 
 
 
@@ -30,47 +34,66 @@ public class User {
     private String id;
 
     private  String nickname;
+
     private String password;
 
     @Column(name = "phonenumber")
     private  String phoneNumber;
 
 
-    @Column(name = "createdat")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
 
-    @Column(name = "updatedat")
+    @Column(name = "updated_at")
     private LocalDateTime  updatedAt;
 
-    @Column(name = "profileimage")
+    @Column(name = "profile_image")
     @Lob
     private String profileImage;
 
-    @Column(name = "preferregion")
+    @Column(name = "prefer_region")
     private String preferRegion;
 
     @Column(name = "lastlogin")
     private LocalDateTime lastLogin;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
 
-    public User JoinToEntity(UserJoin user){
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    @Override
+    public String getUsername() {
+
+        return userUID;
+    }
+    private UserDetails createUserDetails(User user){
         return User.builder()
-                .userUID(user.getUserUID())
                 .id(user.getId())
-                .nickname(user.getNickname())
                 .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .profileImage(user.getProfileImage())
-                .preferRegion(user.getPreferRegion())
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 
 
-//    public  User LoginToEntity(UserLogin login){
-//        return
-//    }
 }

@@ -1,14 +1,20 @@
 package com.LeaveIt.server.service;
 
+import com.LeaveIt.server.config.JwtTokenProvider;
+import com.LeaveIt.server.controller.model.jwt.JwtToken;
 import com.LeaveIt.server.controller.model.response.UserJoin;
 import com.LeaveIt.server.controller.model.response.UserLogin;
+import com.LeaveIt.server.exception.UserException;
 import com.LeaveIt.server.repository.entity.KakaoUser;
 import com.LeaveIt.server.repository.KakaoUserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.LeaveIt.server.exception.ErrorCode.*;
 
 
 @Slf4j
@@ -16,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class KakaoLoginServiceImpl implements LoginService{
 
+    private final JwtTokenProvider jwtTokenProvider;
 
     private final  KakaoUserRepository kakaoUserRepository;
 
@@ -27,29 +34,41 @@ public class KakaoLoginServiceImpl implements LoginService{
         log.info(join.getKakaoUID());
 
         if (join.getKakaoUID().equals(kakaoUserRepository.findByUserKaKaoId(join.getKakaoUID()))){
-
-            return "아이디가 중복됩니다";
+            throw  new UserException(ALREADY_KAKAOID_FAIR);
         }
-
         kakaoUserRepository.save(kakaoJoin.KaKaoJoinToEntity(join));
 
 
         return  "성공";
     }
+    @Override
+    public JwtToken login(UserLogin userLoginResponse) {
+
+//        return loginCheck(userLoginResponse);
+        return  null;
+    }
 
     @Override
-    public String login(UserLogin userLoginResponse) {
+    public JwtToken createToken(UserLogin userLoginResponse) {
 
-        return loginCheck(userLoginResponse);
+        return  null;
+    }
+
+    @Override
+    public JwtToken test(UserLogin userLoginResponse) {
+
+
+        return null;
     }
 
 
     private String loginCheck(UserLogin login) {
-
-        if (  kakaoUserRepository.findByUserKaKaoId(login.getKakaoUID()).equals(login.getKakaoUID())) {
-                return "성공";
-            } else {
-            return "아이디가 올바르지않습니다";
+        log.info("hello");
+        String kakaoId= kakaoUserRepository.findByUserKaKaoId(login.getKakaoUID());
+        if ( kakaoId==null ||!kakaoId.equals(login.getKakaoUID())){
+            throw  new UserException(KAKAOID_NOT_FOUND);
+            }  else {
+            return "성공";
         }
 
     }

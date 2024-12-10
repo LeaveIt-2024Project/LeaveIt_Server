@@ -20,6 +20,10 @@ public class ReviewResponse {
 
     private String  feedUID;
 
+    private  String kaKaoUID;
+
+    private  String userUID;
+
     private String nickname;
 
     private  String content;
@@ -47,6 +51,8 @@ public class ReviewResponse {
         log.info(response.toString());
         return Review.builder()
                 .feedUID(UUID.randomUUID().toString())
+                .userUID(response.getUserUID())
+                .kaKaoUID(response.getKaKaoUID())
                 .nickname(response.getNickname())
                 .content(response.getContent())
                 .feedImage(response.getFeedImage())

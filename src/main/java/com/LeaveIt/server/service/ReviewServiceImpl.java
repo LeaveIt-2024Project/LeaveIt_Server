@@ -48,6 +48,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<ReviewRequest> findReviewRegionAll(String region) {
+
+        ReviewRequest reviewRequest=new ReviewRequest();
+        return reviewRequest.Review_To_DTO(reviewRepository.findAllByRegionReview(region));
+    }
+
+    @Override
     @Transactional
     public void saveReviewLike(String feedUID, LikeReview likeReview) {
         checkedLike(feedUID, likeReview);

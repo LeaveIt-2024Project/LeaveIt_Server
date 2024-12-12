@@ -32,6 +32,8 @@ public class ReviewRequest {
 
     private  String placeArea;
 
+    private  String region;
+
     private Boolean isUserLiked;
 
     private LocalDateTime createdAt;

@@ -46,6 +46,12 @@ public class ReviewController {
         return  reviewService.findReviewAll();
     }
 
+    @GetMapping("/get/review/region/{region}")
+    public List<ReviewRequest> getReviewRegion(@PathVariable String region){
+
+        return  reviewService.findReviewRegionAll(region);
+    }
+
     @PostMapping("/save/like/{feedUID}")
     public void  saveReviewLike(@PathVariable String feedUID, @RequestBody LikeReview likeReview){
 

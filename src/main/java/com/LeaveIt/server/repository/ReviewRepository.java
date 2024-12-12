@@ -42,4 +42,9 @@ public interface ReviewRepository  extends JpaRepository<Review , String> {
     @Query("UPDATE Review r SET r.likeCount = r.likeCount -1 WHERE r.feedUID = :feedUID")
     void  minusCountLike(@Param("feedUID") String  feedUID);
 
+
+    @Query("select  r from Review r where  r.region= :region")
+    List<Review>  findAllByRegionReview(@Param("region") String region);
+
+
 }

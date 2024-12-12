@@ -15,6 +15,7 @@ public interface ReviewService {
 
     List<ReviewRequest> findReviewAll();
 
+    List<ReviewRequest> findReviewRegionAll(String region);
     void saveReviewLike(String feedUID , LikeReview likeReview);
 
     void cancelReviewLike(String feedUID, LikeReview likeReview);

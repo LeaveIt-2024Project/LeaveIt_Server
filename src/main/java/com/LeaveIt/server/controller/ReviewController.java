@@ -6,6 +6,9 @@ import com.LeaveIt.server.controller.model.response.LikeReview;
 import com.LeaveIt.server.controller.model.response.ReviewResponse;
 import com.LeaveIt.server.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,10 +50,29 @@ public class ReviewController {
     }
 
     @GetMapping("/get/review/region/{region}")
-    public List<ReviewRequest> getReviewRegion(@PathVariable String region){
+    public Page<ReviewRequest> getReviewRegion(@PageableDefault(page = 0, size = 10) Pageable pageable, @PathVariable String region){
 
-        return  reviewService.findReviewRegionAll(region);
+        return  reviewService.findReviewRegionAll(region,pageable);
     }
+
+    @GetMapping("/get/review/region/latest/{region}")
+    public Page<ReviewRequest> getReviewLatestRegion(@PageableDefault(page = 0, size = 10) Pageable pageable, @PathVariable String region){
+
+        return  reviewService.findReviewLatestRegion(region,pageable);
+    }
+
+    @GetMapping("/get/review/region/like/rank/{region}")
+    public Page<ReviewRequest> getReviewLikeDESCRegion(@PageableDefault(page = 0, size = 10) Pageable pageable, @PathVariable String region){
+
+        return  reviewService.findReviewLikeDESCRegion(region,pageable);
+    }
+
+    @GetMapping("/get/review/region/star/rank/{region}")
+    public Page<ReviewRequest> getReviewStarDESCRegion(@PageableDefault(page = 0, size = 10) Pageable pageable, @PathVariable String region){
+
+        return  reviewService.findReviewStarDESCRegion(region,pageable);
+    }
+
 
     @PostMapping("/save/like/{feedUID}")
     public void  saveReviewLike(@PathVariable String feedUID, @RequestBody LikeReview likeReview){

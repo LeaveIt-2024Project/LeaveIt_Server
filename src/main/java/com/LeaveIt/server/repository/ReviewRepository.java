@@ -1,8 +1,9 @@
 package com.LeaveIt.server.repository;
 
-import com.LeaveIt.server.controller.model.request.ReviewRequest;
 import com.LeaveIt.server.repository.entity.Review;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,10 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-import com.LeaveIt.server.repository.entity.Review;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 
 @Repository
@@ -44,7 +41,19 @@ public interface ReviewRepository  extends JpaRepository<Review , String> {
 
 
     @Query("select  r from Review r where  r.region= :region")
-    List<Review>  findAllByRegionReview(@Param("region") String region);
+    Page<Review> findAllByRegionReview(@Param("region") String region, Pageable pageable);
 
+
+    @Query("select  r from  Review  r where  r.region=:region order by r.createdAt DESC ")
+    Page<Review> findAllByRegionLatestReview(@Param("region") String region, Pageable pageable);
+
+    @Query("select  r from  Review  r where  r.region=:region order by r.likeCount DESC ")
+    Page<Review>  findAllByRegionLikeDESCReview(@Param("region") String region, Pageable pageable);
+
+    @Query("select  r from  Review  r where  r.region=:region order by r.starCount DESC ")
+    Page<Review>  findAllByRegionStarDESCReview(@Param("region") String region, Pageable pageable);
 
 }
+
+
+

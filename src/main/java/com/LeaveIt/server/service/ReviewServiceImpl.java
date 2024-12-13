@@ -8,8 +8,11 @@ import com.LeaveIt.server.exception.ErrorCode;
 import com.LeaveIt.server.exception.ReviewException;
 import com.LeaveIt.server.repository.LikeRepository;
 import com.LeaveIt.server.repository.ReviewRepository;
+import com.LeaveIt.server.repository.entity.Review;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,10 +51,36 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewRequest> findReviewRegionAll(String region) {
+    public Page<ReviewRequest> findReviewLikeDESCRegion(String region, Pageable pageable) {
 
-        ReviewRequest reviewRequest=new ReviewRequest();
-        return reviewRequest.Review_To_DTO(reviewRepository.findAllByRegionReview(region));
+
+        Page<Review> page=reviewRepository.findAllByRegionLikeDESCReview(region,pageable);
+
+        return  reviewToMap(page);
+    }
+
+    @Override
+    public Page<ReviewRequest> findReviewLatestRegion(String region, Pageable pageable) {
+
+         Page<Review> page= reviewRepository.findAllByRegionLatestReview(region,pageable);
+         return reviewToMap(page);
+    }
+
+    @Override
+    public Page<ReviewRequest> findReviewRegionAll(String region, Pageable pageable) {
+
+        Page<Review> page=reviewRepository.findAllByRegionReview(region,pageable);
+        return   reviewToMap(page);
+    }
+
+
+    @Override
+    public Page<ReviewRequest> findReviewStarDESCRegion(String region, Pageable pageable) {
+
+        Page<Review> page=reviewRepository.findAllByRegionStarDESCReview(region,pageable);
+
+        return  reviewToMap(page);
+
     }
 
     @Override
@@ -102,5 +131,18 @@ public class ReviewServiceImpl implements ReviewService {
         return true;
 
     }
+
+    private static Page<ReviewRequest> reviewToMap(Page<Review> page) {
+      return    page.map(m->new ReviewRequest(
+                m.getFeedUID(),
+                m.getNickname(),
+                m.getContent(),
+                m.getLikeCount(),
+                m.getPlaceArea(),
+                m.getStarCount(),
+                m.getRegion(),
+                m.getCreatedAt()));
+    }
+
 }
 

@@ -38,9 +38,18 @@ public class ReviewRequest {
 
     private LocalDateTime createdAt;
 
+    public ReviewRequest(String feedUID, String nickname, String content, Integer likeCount, String placeArea, Integer starCount, String region, LocalDateTime createdAt) {
 
+        this.feedUID=feedUID;
+        this.nickname=nickname;
+        this.content=content;
+        this.likeCount=likeCount;
+        this.placeArea=placeArea;
+        this.starCount=starCount;
+        this.region=region;
+        this.createdAt=createdAt;
 
-
+    }
 
 
     public List<ReviewRequest> Review_To_DTO(List<Review> reviews) {
@@ -52,8 +61,7 @@ public class ReviewRequest {
                         .likeCount(review.getLikeCount())
                         .starCount(review.getStarCount())
                         .placeArea(review.getPlaceArea())
-                        .isUserLiked(review.getIsUserLiked())
-                        .createdAt(LocalDateTime.now())
+                        .createdAt(review.getCreatedAt())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -20,9 +20,7 @@ public class KakaoUser {
     @Id
     private String kakaoUID;
 
-
     private  String nickname;
-
 
     @Column(name = "profileimage")
     @Lob

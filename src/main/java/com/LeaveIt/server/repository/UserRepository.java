@@ -6,16 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User,String> {
-
 
     @Query("select u.id  from user u where :id=u.id")
     String findByUserId(@Param("id") String id);
 
-    @Query("select u.password  from user u where :password=u.password")
-    String findByPassword(@Param("password") String password);
+    @Query("select u.password  from user u where :id=u.id")
+    String findByPassword(@Param("id") String id);
 
 
+    @Query("select u.feedUID  from Review u where :id=u.feedUID")
+    String findByLikeId(@Param("id") String id);
 
 }

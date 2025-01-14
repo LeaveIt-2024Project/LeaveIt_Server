@@ -34,6 +34,10 @@ public class Review {
 
     private  String content;
 
+
+    private  String region;
+
+
     @Column(name = "feedimage")
     private String feedImage;
 

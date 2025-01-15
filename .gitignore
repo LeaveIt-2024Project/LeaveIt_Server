@@ -1,9 +1,10 @@
 <<<<<<< HEAD
 # Compiled class file
 *.class
-/src/main/resources/application.properties
-/src/main/resources/application.yml
-# Log file
+# Ignore all application properties and yaml files
+**/application.properties
+**/application.yml
+# Log fileources/application.yml
 *.log
 
 # BlueJ files

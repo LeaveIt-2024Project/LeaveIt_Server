@@ -1,4 +1,4 @@
-package com.example.domain.repository;
+package com.example.domain.entity.repository;
 
 import com.example.domain.entity.Review;
 import jakarta.transaction.Transactional;

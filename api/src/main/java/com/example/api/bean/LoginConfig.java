@@ -1,16 +1,19 @@
 package com.example.api.bean;
 
 import com.example.common.config.JwtTokenProvider;
+import com.example.domain.document.dao.SearchDAO;
+import com.example.domain.searchservice.SearchService;
+import com.example.domain.searchservice.SearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.example.domain.repository.KakaoUserRepository;
-import com.example.domain.repository.UserRepository;
-import com.example.domain.service.KakaoLoginServiceImpl;
-import com.example.domain.service.LoginService;
-import com.example.domain.service.LoginServiceImpl;
+import com.example.domain.entity.repository.KakaoUserRepository;
+import com.example.domain.entity.repository.UserRepository;
+import com.example.domain.userservice.KakaoLoginServiceImpl;
+import com.example.domain.userservice.LoginService;
+import com.example.domain.userservice.LoginServiceImpl;
 
 
 @Configuration
@@ -40,5 +43,6 @@ public class LoginConfig {
 
             return new KakaoLoginServiceImpl(jwtTokenProvider, kakaoUserRepository);
         }
-    }
+
+     }
 

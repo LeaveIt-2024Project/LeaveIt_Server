@@ -1,4 +1,4 @@
-package com.example.domain.service;
+package com.example.domain.userservice;
 
 
 
@@ -7,8 +7,8 @@ import com.example.common.exception.ErrorCode;
 import com.example.common.exception.ReviewException;
 import com.example.domain.mapper.LikeMapper;
 import com.example.domain.mapper.ReviewMapper;
-import com.example.domain.repository.LikeRepository;
-import com.example.domain.repository.ReviewRepository;
+import com.example.domain.entity.repository.LikeRepository;
+import com.example.domain.entity.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.example.common.model.request.ReviewRequest;

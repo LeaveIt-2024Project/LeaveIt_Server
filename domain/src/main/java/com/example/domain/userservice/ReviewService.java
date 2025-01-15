@@ -1,4 +1,4 @@
-package com.example.domain.service;
+package com.example.domain.userservice;
 
 
 

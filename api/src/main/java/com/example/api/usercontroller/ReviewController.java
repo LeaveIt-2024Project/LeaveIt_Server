@@ -1,4 +1,4 @@
-package com.example.api.controller;
+package com.example.api.usercontroller;
 
 
 import com.example.common.model.request.ReviewRequest;
@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.domain.service.ReviewService;
+import com.example.domain.userservice.ReviewService;
 
 @RestController
 @RequiredArgsConstructor

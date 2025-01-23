@@ -1,11 +1,11 @@
-package com.example.domain.service;
+package com.example.domain.userservice;
 
 
 import com.example.common.config.JwtTokenProvider;
 import com.example.domain.entity.KakaoUser;
 import com.example.common.exception.UserException;
 import com.example.common.jwt.JwtToken;
-import com.example.domain.repository.KakaoUserRepository;
+import com.example.domain.entity.repository.KakaoUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

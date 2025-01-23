@@ -1,12 +1,12 @@
 package com.example.common.config;
 
 
+import com.example.common.model.response.UserLogin;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import com.example.common.jwt.JwtToken;
 import lombok.extern.slf4j.Slf4j;
-import com.example.common.model.response.UserLogin;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

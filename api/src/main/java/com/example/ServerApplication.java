@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 //@Import(SecurityConfig.class)
 //@ComponentScan(basePackages = {
-////		"com.example.api",
+//		"com.example.infra",
+//		"com.example.api",
 //		"com.example.common",
-////		"com.example.domain",
+//		"com.example.domain",
 //
 //})
 public class ServerApplication {

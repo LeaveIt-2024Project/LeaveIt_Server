@@ -1,5 +1,7 @@
 package com.example.common.exception;
 
+import com.example.common.exception.db.DBIoException;
+import com.example.common.exception.db.EsIoException;
 import lombok.extern.slf4j.Slf4j;
 import com.example.common.model.response.ErrorDTO;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +30,18 @@ public class GlobalControllerAdvice {
         return  new ResponseEntity(new ErrorDTO(ex.getErrorCode().getStatus(),ex.getErrorCode().getMessage()),ex.getErrorCode().getStatus());
 
     }
+
+    @ExceptionHandler(DBIoException.class)
+    protected ResponseEntity handlerDBException(ReviewException ex) {
+        return  new ResponseEntity(new ErrorDTO(ex.getErrorCode().getStatus(),ex.getErrorCode().getMessage()),ex.getErrorCode().getStatus());
+
+    }
+
+    @ExceptionHandler(EsIoException.class)
+    protected ResponseEntity handlerEsException(ReviewException ex) {
+        return  new ResponseEntity(new ErrorDTO(ex.getErrorCode().getStatus(),ex.getErrorCode().getMessage()),ex.getErrorCode().getStatus());
+
+    }
+
 
 }

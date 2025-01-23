@@ -1,11 +1,11 @@
-package com.example.domain.service;
+package com.example.domain.userservice;
 
 
 import com.example.common.config.JwtTokenProvider;
 import com.example.domain.entity.User;
 import com.example.common.exception.UserException;
 import com.example.common.jwt.JwtToken;
-import com.example.domain.repository.UserRepository;
+import com.example.domain.entity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

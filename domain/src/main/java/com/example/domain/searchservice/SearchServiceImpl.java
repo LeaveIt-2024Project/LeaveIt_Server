@@ -1,11 +1,12 @@
 package com.example.domain.searchservice;
 
-import com.example.common.model.request.TouristRequest;
+import com.example.common.model.request.FoodRequest;
+import com.example.common.model.request.PlaceRequest;
 import com.example.domain.document.dao.SearchDAO;
-import com.example.domain.mapper.TouristMapper;
+import com.example.domain.mapper.FoodMapper;
+import com.example.domain.mapper.PlaceMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,9 +20,27 @@ public class SearchServiceImpl  implements  SearchService{
 
     private  final SearchDAO searchDAO;
 
-    private  final TouristMapper touristMapper;
+    private  final FoodMapper foodMapper;
+    private  final PlaceMapper touristMapper;
     @Override
-    public List<TouristRequest> getTourist() throws IOException {
-        return touristMapper.Tourist_To_DTO(searchDAO.findTouristAll());
+    public List<PlaceRequest> getAreaPlaceList(String area,int num)  {
+        return touristMapper.Tourist_To_DTO(searchDAO.findAreaPlace(area,num));
+    }
+
+
+    @Override
+    public List<PlaceRequest> getSearchAreaPlaceList(String place,int num)  {
+        return touristMapper.Tourist_To_DTO(searchDAO.searchAreaPlace(place,num));
+    }
+
+    @Override
+    public List<PlaceRequest> getTypePlaceList(String cat, int num) {
+
+        return touristMapper.Tourist_To_DTO(searchDAO.findTypePlace(cat,num));
+    }
+
+    @Override
+    public List<FoodRequest> getAreaFoodList(int num, String  areaCode) throws IOException {
+        return foodMapper.Food_To_DTO(searchDAO.findAreaFood(num,areaCode));
     }
 }

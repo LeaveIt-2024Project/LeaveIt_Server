@@ -23,11 +23,13 @@ public class PlaceRequest {
 
     private  String contentId;
 
+    private  String  contentTypeId;
+
     private  String firstImage;
 
-    private  String mapX;
+    private  Double longtitude;
 
-    private  String  mapY;
+    private Double  langitutde;
 
     private  String tel;
 }

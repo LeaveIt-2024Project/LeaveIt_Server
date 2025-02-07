@@ -20,13 +20,14 @@ public class PlaceMapper {
                 .map(t -> PlaceRequest.builder()
                         .contentId(t.getContentid())
                         .cat(t.getCat())
-                        .areaCode(t.getAreacode())
+                        .areaCode(t.getAreaCode())
                         .addr1(t.getAddr1())
+                        .contentTypeId(t.getContenttypeid())
                         .title(t.getTitle())
                         .tel(t.getTel())
                         .firstImage(t.getFirstimage())
-                        .mapX(t.getMapx())
-                        .mapY(t.getMapy())
+                        .longtitude(t.getLongtitude())
+                        .langitutde(t.getLangitutde())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -10,8 +10,8 @@ CMD ["./gradlew", "clean", "build"]
 
 VOLUME /tmp
 
+ARG JAR_FILE=api/build/libs/api-0.0.1-SNAPSHOT.jar
 
-ARG JAR_FILE=build/libs/*.jar
 # or Maven
 # ARG JAR_FILE_PATH=target/*.jar
 # Docker 베포

@@ -1,9 +1,6 @@
 package com.example.api.bean;
 
 import com.example.common.config.JwtTokenProvider;
-import com.example.domain.document.dao.SearchDAO;
-import com.example.domain.searchservice.SearchService;
-import com.example.domain.searchservice.SearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

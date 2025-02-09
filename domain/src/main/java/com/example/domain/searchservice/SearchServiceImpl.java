@@ -83,6 +83,12 @@ public class SearchServiceImpl  implements  SearchService{
         }
 
     }
+
+    @Override
+    public List<String> getPopularPlace() {
+        return searchDAO.searchPopularPlace();
+    }
+
     private void saveLogsToElasticsearch() {
         if (logQueue.isEmpty()) return;
 

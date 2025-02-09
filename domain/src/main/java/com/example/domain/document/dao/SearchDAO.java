@@ -13,5 +13,5 @@ public interface SearchDAO {
 
     void saveSearchLog(List<PlaceLog> batchLogs);
 
-
+    List<String> searchPopularPlace();
 }

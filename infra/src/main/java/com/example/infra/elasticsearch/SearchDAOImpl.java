@@ -87,8 +87,28 @@ public class SearchDAOImpl implements  SearchDAO {
             if (response.errors()) {
                 System.err.println("Bulk insert 실패: " + response.toString());
             }
+        } catch (IOException e) {
+            log.error("데이터 값이 존재하지않습니다");
+            throw new EsIoException(ES_NOT_FOUND);
+        }
+    }
+
+        @Override
+        public List<String> searchPopularPlace() {
+            try {
+                SearchResponse<PlaceLog> response = client.search(s -> s
+                        .index("placelog")
+                        .size(0)
+                        .aggregations("popularPlace", a -> a
+                                .terms(t -> t.field("title").size(10))
+                        ), PlaceLog.class);
+                return response.aggregations().get("popularPlace").sterms().buckets().array()
+                        .stream()
+                        .map(bucket -> bucket.key().stringValue())
+                        .collect(Collectors.toList());
+
             } catch (IOException e) {
-                log.error("데이터 값이 존재하지않습니다");
+                log.error("데이터 값이 존재하지 않습니다");
                 throw new EsIoException(ES_NOT_FOUND);
             }
         }

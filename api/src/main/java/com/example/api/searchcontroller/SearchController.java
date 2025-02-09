@@ -3,14 +3,18 @@ package com.example.api.searchcontroller;
 
 import com.example.common.model.request.FoodRequest;
 import com.example.common.model.request.PlaceRequest;
+import com.example.common.model.response.LogResponse;
+import com.example.domain.document.PlaceLog;
 import com.example.domain.searchservice.SearchService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 public class SearchController {
 
@@ -47,10 +51,13 @@ public class SearchController {
         return  searchService.getSearchPlace(num,text);
     }
 
-
-    @PostMapping("/tour/area/log/{text}")
-    public  void saveLog(String  text){
-         searchService.saveLog(text);
+    @GetMapping("/tour/area/populars")
+    public List<String> getPopularPlace(){
+        return  searchService.getPopularPlace();
+    }
+    @PostMapping("/tour/area/log")
+    public  void saveLog(@RequestBody LogResponse response){
+         searchService.saveLog(response);
     }
 
     //    @GetMapping("/food/{areaCode}")

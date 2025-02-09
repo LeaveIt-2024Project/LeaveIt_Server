@@ -42,5 +42,4 @@ public class ReviewResponse {
     private LocalDateTime updatedAt;
 
 
-
 }

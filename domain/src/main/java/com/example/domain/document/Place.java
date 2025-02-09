@@ -14,7 +14,7 @@ public class Place {
     @Id
     private  String id;
 
-    private String areacode;
+    private String areaCode;
 
     private String  cat;
 
@@ -22,16 +22,17 @@ public class Place {
 
     private  String addr1;
 
+    private  String  contenttypeid;
 
     private  String contentid;
 
     private  String firstimage;
 
 
-    private  String mapx;
+    private  Double longtitude;
 
 
-    private  String  mapy;
+    private  Double langitutde;
 
     private  String tel;
 

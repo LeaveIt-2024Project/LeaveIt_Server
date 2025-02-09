@@ -3,12 +3,10 @@ package com.example.api.searchcontroller;
 
 import com.example.common.model.request.FoodRequest;
 import com.example.common.model.request.PlaceRequest;
+import com.example.common.model.response.LogResponse;
 import com.example.domain.searchservice.SearchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,22 +29,40 @@ public class SearchController {
 
         return  searchService.getSearchAreaPlaceList(place,num);
     }
-
-    @GetMapping("/tour/area/type/{cat}")
+    @GetMapping("/tour/area/cat/{cat}")
     public List<PlaceRequest> getTypePlace(@PathVariable String cat, int num)  {
-
         return  searchService.getTypePlaceList(cat,num);
     }
 
-//    @GetMapping("/food/{areaCode}")
-//    public List<FoodRequest> getFoodAreaList(@RequestParam int page, @PathVariable String areaCode ) throws IOException {
-//
-//        return  searchService.getAreaFoodList(page,areaCode);
-//    }
-
-    @GetMapping("/food/area/{areaCode}")
-    public List<FoodRequest> getFoodAreaList(@RequestParam int page, @PathVariable String areaCode ) throws IOException {
-
-        return  searchService.getAreaFoodList(page,areaCode);
+    @GetMapping("/tour/area/type/{cat}")
+    public List<PlaceRequest> getTypeAndAreaPlace(@PathVariable String cat,
+                                           @RequestParam(required = false) String areaCode,
+                                           int num)  {
+        return  searchService.findTypeAndAreaPlace(cat,areaCode,num);
     }
+
+
+    @GetMapping("/tour/area/search/input/{text}")
+    public List<PlaceRequest> getSearchPlace(@PathVariable String text,@RequestParam int num){
+
+        return  searchService.getSearchPlace(num,text);
+    }
+
+
+    @PostMapping("/tour/area/log")
+    public  void saveLog(@RequestBody LogResponse response){
+         searchService.saveLog(response);
+    }
+
+    //    @GetMapping("/food/{areaCode}")
+    //    public List<FoodRequest> getFoodAreaList(@RequestParam int page, @PathVariable String areaCode ) throws IOException {
+    //
+    //        return  searchService.getAreaFoodList(page,areaCode);
+    //    }
+
+    //    @GetMapping("/food/area/{areaCode}")
+    //    public List<FoodRequest> getFoodAreaList(@RequestParam int page, @PathVariable String areaCode ) throws IOException {
+    //
+    //        return  searchService.getAreaFoodList(page,areaCode);
+    //    }
 }

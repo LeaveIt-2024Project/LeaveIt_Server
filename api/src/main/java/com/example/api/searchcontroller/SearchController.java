@@ -3,6 +3,7 @@ package com.example.api.searchcontroller;
 
 import com.example.common.model.request.FoodRequest;
 import com.example.common.model.request.PlaceRequest;
+import com.example.common.model.response.LogResponse;
 import com.example.domain.searchservice.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +49,9 @@ public class SearchController {
     }
 
 
-    @PostMapping("/tour/area/log/{text}")
-    public  void saveLog(String  text){
-         searchService.saveLog(text);
+    @PostMapping("/tour/area/log")
+    public  void saveLog(@RequestBody LogResponse response){
+         searchService.saveLog(response);
     }
 
     //    @GetMapping("/food/{areaCode}")

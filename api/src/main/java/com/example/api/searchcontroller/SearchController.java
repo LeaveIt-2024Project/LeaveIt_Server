@@ -34,6 +34,8 @@ public class SearchController {
     }
     @GetMapping("/tour/area/cat/{cat}")
     public List<PlaceRequest> getTypePlace(@PathVariable String cat, int num)  {
+        log.info(cat);
+        log.info(String.valueOf(num));
         return  searchService.getTypePlaceList(cat,num);
     }
 

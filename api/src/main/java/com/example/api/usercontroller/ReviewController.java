@@ -1,30 +1,37 @@
 package com.example.api.usercontroller;
 
 
+import com.example.common.config.S3Uploader;
 import com.example.common.model.request.ReviewRequest;
 import com.example.common.model.response.LikeReview;
 import com.example.common.model.response.ReviewResponse;
 
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.domain.userservice.ReviewService;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 public class ReviewController {
 
 
     private final ReviewService reviewService;
+
+    private final S3Uploader s3Uploader;
 
 
     @GetMapping("/get/review/{id}")
@@ -36,7 +43,12 @@ public class ReviewController {
 
     @PostMapping("/save/review")
     public ReviewResponse saveReview(
-            @RequestBody ReviewResponse response) {
+            @RequestParam(required = false, value = "imageFiles") MultipartFile file,
+            @RequestBody ReviewResponse response) throws IOException {
+        if (file != null && !file.isEmpty()) {
+            log.info("File upload started");
+            response.setFeedImage(s3Uploader.upload(file,response.getFeedUID()));
+        }
 
         return reviewService.saveReview(response);
     }
